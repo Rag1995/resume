@@ -11,8 +11,11 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
-    HelloWorld: typeof import('./components/HelloWorld.vue')['default']
+    ExperienceTimeline: typeof import('./components/ExperienceTimeline.vue')['default']
+    HeroBanner: typeof import('./components/HeroBanner.vue')['default']
+    ProjectItem: typeof import('./components/ProjectItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SectionNav: typeof import('./components/SectionNav.vue')['default']
   }
 }
