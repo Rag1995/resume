@@ -1,10 +1,13 @@
 import { fileURLToPath, URL } from 'node:url'
+
+import tailwindcss from '@tailwindcss/vite'
 import vue from '@vitejs/plugin-vue'
+import AutoImport from 'unplugin-auto-import/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+import Icons from 'unplugin-icons/vite'
+import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import VueRouter from 'vue-router/vite'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -29,7 +32,10 @@ export default defineConfig({
       collapseSamePrefixes: true,
       dts: 'src/vue-components.d.ts',
       dirs: ['src/components'],
+      // 模板中直接使用 <ITablerMail />，圖示在打包時轉成 inline SVG 元件
+      resolvers: [IconsResolver({ enabledCollections: ['tabler'] })],
     }),
+    Icons({ compiler: 'vue3' }),
     tailwindcss(),
   ],
   resolve: {

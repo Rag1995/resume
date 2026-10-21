@@ -66,8 +66,10 @@ onBeforeUnmount(() => {
     <aside class="sidebar">
       <SectionNav :items="navItems" :active-id="activeId" />
       <div class="sidebar-contact">
-        <a :href="`mailto:${profile.email}`">{{ profile.email }}</a>
-        <a :href="profile.github" target="_blank" rel="noreferrer">{{ profile.githubLabel }}</a>
+        <a :href="`mailto:${profile.email}`"> <ITablerMail class="icon" aria-hidden="true" />{{ profile.email }} </a>
+        <a :href="profile.github" target="_blank" rel="noreferrer">
+          <ITablerBrandGithub class="icon" aria-hidden="true" />{{ profile.githubLabel }}
+        </a>
       </div>
     </aside>
 
@@ -112,9 +114,13 @@ onBeforeUnmount(() => {
         <h2 id="contact-title">聯絡</h2>
         <p class="contact-lead">{{ profile.status }}，歡迎來信聊聊職缺或合作。</p>
         <div class="contact-actions">
-          <a class="button" :href="`mailto:${profile.email}`">寄信給我</a>
+          <a class="button" :href="`mailto:${profile.email}`">
+            <ITablerMail class="icon" aria-hidden="true" />寄信給我
+          </a>
           <a :href="profile.github" target="_blank" rel="noreferrer">
-            在 GitHub 上看更多<span class="visually-hidden">（另開新視窗）</span>
+            <ITablerBrandGithub class="icon" aria-hidden="true" />
+            在 GitHub 上看更多
+            <span class="visually-hidden"> （另開新視窗）</span>
           </a>
         </div>
       </section>
@@ -149,6 +155,20 @@ onBeforeUnmount(() => {
 
 .sidebar-contact {
   display: none;
+}
+
+/* 圖示跟著連結文字的顏色與大小 */
+.icon {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.sidebar-contact a,
+.contact-actions a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
 }
 
 .trail-zone {
@@ -230,7 +250,6 @@ dd li {
 }
 
 .button {
-  display: inline-block;
   padding: 0.7rem 1.6rem;
   border-radius: var(--radius);
   background: var(--accent);
