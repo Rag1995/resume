@@ -55,6 +55,8 @@ const prints = computed(() => {
   left: -3.2rem;
   width: 2rem;
   pointer-events: none;
+  /* 讓固定在視窗上的遮罩只畫在腳印區塊內，不會蓋到主視覺、經歷或頁尾 */
+  clip-path: inset(0 -2rem);
 }
 
 @media (min-width: 960px) {
@@ -71,7 +73,6 @@ const prints = computed(() => {
   height: 1.4rem;
   margin-left: -0.7rem;
   transform: translateX(var(--x)) rotate(var(--r));
-  opacity: 0.6;
 }
 
 .paw svg {
@@ -81,45 +82,20 @@ const prints = computed(() => {
   fill: color-mix(in srgb, var(--accent) 45%, var(--line));
 }
 
-.paw-fade {
-  display: none;
-}
-
 /*
  * 出現／消失效果：一條固定在視窗上的漸層遮罩蓋在腳印欄位上，
  * 視窗上緣與下緣是背景色、中間透明。腳印捲進中段就「出現」，
  * 捲到上緣就「消失」。
  * 遮罩是 position: fixed 且 left 為 auto，水平位置會跟著腳印欄位；
- * 腳印本身沒有動畫，快速捲動時瀏覽器不需要逐一更新圖層。
+ * 父層的 clip-path 讓它只在腳印區塊範圍內顯示。
+ * 腳印與遮罩都沒有動畫，快速捲動時瀏覽器不需要逐一更新圖層。
  */
-@supports (animation-timeline: scroll()) {
-  @media (prefers-reduced-motion: no-preference) {
-    .paw {
-      opacity: 1;
-    }
-
-    .paw-fade {
-      display: block;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 3.3rem;
-      margin-left: -0.7rem;
-      background: linear-gradient(to bottom, var(--paper) 12%, transparent 30%, transparent 74%, var(--paper) 82%);
-      /* 主視覺還在畫面上時不要蓋到插畫，離開後才淡入 */
-      animation: paw-fade-in linear both;
-      animation-timeline: scroll(root block);
-      animation-range: 0 60svh;
-    }
-  }
-}
-
-@keyframes paw-fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+.paw-fade {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 3.3rem;
+  margin-left: -0.7rem;
+  background: linear-gradient(to bottom, var(--paper) 12%, transparent 30%, transparent 74%, var(--paper) 82%);
 }
 </style>
