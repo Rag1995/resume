@@ -12,15 +12,17 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 <template>
   <header class="hero">
     <div class="hero-art">
-      <img
-        :src="banner1280"
-        :srcset="srcset"
-        sizes="100vw"
-        width="1920"
-        height="1080"
-        alt="一群手繪角色在光芒下排成一列的插畫"
-        fetchpriority="high"
-      />
+      <div class="hero-scroll">
+        <img
+          :src="banner1280"
+          :srcset="srcset"
+          sizes="100vw"
+          width="1920"
+          height="1080"
+          alt="一群手繪角色在光芒下排成一列的插畫"
+          fetchpriority="high"
+        />
+      </div>
     </div>
 
     <div class="hero-text">
@@ -46,6 +48,10 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
   height: min(82svh, 56.25vw + 6rem);
   min-height: 22rem;
   overflow: hidden;
+}
+
+.hero-scroll {
+  height: 100%;
 }
 
 .hero-art img {
@@ -125,6 +131,29 @@ h1 {
   from {
     opacity: 0;
     transform: translateY(1rem);
+  }
+}
+
+/*
+ * 捲動退場：主視覺隨頁面往下捲時以較慢的速度下沉並淡出（視差）。
+ * 純 CSS scroll-driven animation，不支援的瀏覽器維持靜態。
+ * 動畫掛在外層 .hero-scroll，避免和 img 的載入動畫搶 transform。
+ */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-scroll {
+      transform-origin: 50% 100%;
+      animation: hero-exit linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 80svh;
+    }
+  }
+}
+
+@keyframes hero-exit {
+  to {
+    transform: translateY(18%) scale(1.04);
+    opacity: 0.35;
   }
 }
 

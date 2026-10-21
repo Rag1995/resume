@@ -81,6 +81,7 @@ export const projects: Project[] = [
     highlights: [
       '主視覺圖片從 2.1 MB 壓縮到 270 KB 以下，並依螢幕寬度載入不同尺寸',
       '側邊導覽會隨捲動標示目前閱讀的段落',
+      '主視覺退場與經歷時間軸以 CSS scroll-driven animations 實作，零 JS 且不支援的瀏覽器自動退回靜態',
       '支援深色模式、鍵盤操作與 prefers-reduced-motion',
     ],
     stack: ['Vue 3', 'TypeScript', 'Vite', 'unplugin-vue-router'],
