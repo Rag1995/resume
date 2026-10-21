@@ -13,16 +13,26 @@ const navItems: NavItem[] = [
 ]
 
 const activeId = ref('about')
+let offsets: { id: string; top: number }[] = []
 let frame = 0
+let resizeObserver: ResizeObserver | undefined
+
+// 版面改變時才量一次各段落的位置；捲動時只做數字比對，避免強制重新排版
+function measure() {
+  offsets = navItems.flatMap(({ id }) => {
+    const el = document.getElementById(id)
+    return el ? [{ id, top: el.getBoundingClientRect().top + window.scrollY }] : []
+  })
+  updateActive()
+}
 
 // 以視窗上方約 1/3 處當作「正在閱讀」的位置：取最後一個頂端已經越過該線的段落
 function updateActive() {
   frame = 0
-  const line = window.innerHeight * 0.33
+  const line = window.scrollY + window.innerHeight * 0.33
   let current = 'about'
-  for (const { id } of navItems) {
-    const el = document.getElementById(id)
-    if (el && el.getBoundingClientRect().top <= line) current = id
+  for (const { id, top } of offsets) {
+    if (top <= line) current = id
   }
   // 捲到底時，最後一段可能永遠碰不到判斷線
   if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
@@ -36,14 +46,15 @@ function onScroll() {
 }
 
 onMounted(() => {
-  updateActive()
+  measure()
+  resizeObserver = new ResizeObserver(measure)
+  resizeObserver.observe(document.body)
   window.addEventListener('scroll', onScroll, { passive: true })
-  window.addEventListener('resize', onScroll, { passive: true })
 })
 
 onBeforeUnmount(() => {
+  resizeObserver?.disconnect()
   window.removeEventListener('scroll', onScroll)
-  window.removeEventListener('resize', onScroll)
   cancelAnimationFrame(frame)
 })
 </script>

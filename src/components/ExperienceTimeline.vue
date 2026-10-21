@@ -82,10 +82,26 @@ defineProps<{ items: Experience[] }>()
       view-timeline-inset: 0;
     }
 
-    .timeline > li::before,
-    .timeline > li:first-child::before {
+    /* 空心圓要疊在進度線之上 */
+    .timeline > li::before {
       z-index: 1;
+    }
+
+    .timeline > li:first-child::before {
       background: var(--paper);
+    }
+
+    /* 疊在空心圓上的實心圓，只動 opacity，避免每幀重繪 background */
+    .timeline > li::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      left: -0.45rem;
+      top: 0.55rem;
+      width: 0.8rem;
+      height: 0.8rem;
+      border-radius: 50%;
+      background: var(--accent);
       animation: fill-dot linear both;
       animation-timeline: --item;
       animation-range: cover calc(40vh + 0.4rem) cover calc(40vh + 1.2rem);
@@ -103,8 +119,11 @@ defineProps<{ items: Experience[] }>()
 }
 
 @keyframes fill-dot {
+  from {
+    opacity: 0;
+  }
   to {
-    background: var(--accent);
+    opacity: 1;
   }
 }
 

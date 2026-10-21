@@ -15,7 +15,7 @@ const prints = computed(() => {
     const side = i % 2 === 0 ? -1 : 1
     return {
       top: i * STEP + 16,
-      x: side * 9 + Math.sin(i / 4) * 6,
+      x: side * 7 + Math.sin(i / 4) * 4,
       // 180deg 讓腳趾朝下，代表往下走
       rotate: 180 - side * 10 + Math.cos(i / 4) * 8,
     }
@@ -41,6 +41,7 @@ const prints = computed(() => {
         <ellipse cx="18.8" cy="10.4" rx="2" ry="2.5" transform="rotate(25 18.8 10.4)" />
       </svg>
     </span>
+    <span class="paw-fade" />
   </div>
 </template>
 
@@ -51,7 +52,7 @@ const prints = computed(() => {
   position: absolute;
   top: 0;
   bottom: 0;
-  left: -2.75rem;
+  left: -3.2rem;
   width: 2rem;
   pointer-events: none;
 }
@@ -62,13 +63,14 @@ const prints = computed(() => {
   }
 }
 
+/* 腳印本身完全靜態，不綁任何動畫 */
 .paw {
   position: absolute;
   left: 50%;
   width: 1.4rem;
   height: 1.4rem;
   margin-left: -0.7rem;
-  transform: translateX(var(--x));
+  transform: translateX(var(--x)) rotate(var(--r));
   opacity: 0.6;
 }
 
@@ -77,42 +79,47 @@ const prints = computed(() => {
   width: 100%;
   height: 100%;
   fill: color-mix(in srgb, var(--accent) 45%, var(--line));
-  transform: rotate(var(--r));
+}
+
+.paw-fade {
+  display: none;
 }
 
 /*
- * 每個腳印各自用 view() timeline：
- * 進入視窗下方約 1/5 時踩出來，捲到視窗上方約 1/4 時淡出。
- * 不支援或偏好減少動態時，維持上面的靜態淡色腳印。
+ * 出現／消失效果：一條固定在視窗上的漸層遮罩蓋在腳印欄位上，
+ * 視窗上緣與下緣是背景色、中間透明。腳印捲進中段就「出現」，
+ * 捲到上緣就「消失」。
+ * 遮罩是 position: fixed 且 left 為 auto，水平位置會跟著腳印欄位；
+ * 腳印本身沒有動畫，快速捲動時瀏覽器不需要逐一更新圖層。
  */
-@supports (animation-timeline: view()) {
+@supports (animation-timeline: scroll()) {
   @media (prefers-reduced-motion: no-preference) {
     .paw {
-      opacity: 0;
-      animation: paw-step linear both;
-      animation-timeline: view(block 0px);
+      opacity: 1;
+    }
+
+    .paw-fade {
+      display: block;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 3.3rem;
+      margin-left: -0.7rem;
+      background: linear-gradient(to bottom, var(--paper) 12%, transparent 30%, transparent 74%, var(--paper) 82%);
+      /* 主視覺還在畫面上時不要蓋到插畫，離開後才淡入 */
+      animation: paw-fade-in linear both;
+      animation-timeline: scroll(root block);
+      animation-range: 0 60svh;
     }
   }
 }
 
-@keyframes paw-step {
-  0%,
-  18% {
+@keyframes paw-fade-in {
+  from {
     opacity: 0;
-    transform: translateX(var(--x)) scale(0.6);
   }
-  26% {
+  to {
     opacity: 1;
-    transform: translateX(var(--x)) scale(1);
-  }
-  70% {
-    opacity: 1;
-    transform: translateX(var(--x)) scale(1);
-  }
-  88%,
-  100% {
-    opacity: 0;
-    transform: translateX(var(--x)) scale(1);
   }
 }
 </style>
