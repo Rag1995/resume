@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import avatar from '@/assets/avatar-256.webp'
 import banner768 from '@/assets/banner-768.webp'
 import banner1280 from '@/assets/banner-1280.webp'
 import banner1920 from '@/assets/banner-1920.webp'
@@ -26,7 +27,10 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
     </div>
 
     <div class="hero-text">
-      <h1>{{ profile.name }}</h1>
+      <div class="identity">
+        <img class="avatar" :src="avatar" width="256" height="256" alt="戴眼鏡的狗獸人頭像插畫" />
+        <h1>{{ profile.name }}</h1>
+      </div>
       <p class="role">{{ profile.role }}，{{ profile.location }}</p>
       <p class="tagline">{{ profile.tagline }}</p>
       <p class="status">
@@ -79,6 +83,24 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
   width: min(100% - 2rem, 68rem);
   margin: -5rem auto 0;
   animation: rise 0.9s 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 0.5rem + 1.5vw, 1.75rem);
+}
+
+/* 頭像高度約與名字的字高相同，外圈用背景色隔開插畫 */
+.avatar {
+  flex: none;
+  width: clamp(4.5rem, 2.5rem + 6vw, 7.5rem);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 4px solid var(--paper);
+  box-shadow: 0 0 0 1px var(--line);
+  background: var(--surface);
 }
 
 h1 {

@@ -17,6 +17,8 @@ export interface Profile {
   email: string
   github: string
   githubLabel: string
+  /** 頭像插畫的繪師 */
+  avatarCredit: { name: string; url: string }
 }
 
 export interface SkillGroup {
@@ -50,6 +52,7 @@ export const profile: Profile = {
   email: 'you@example.com', // TODO: 換成你的聯絡信箱
   github: 'https://github.com/Rag1995',
   githubLabel: 'github.com/Rag1995',
+  avatarCredit: { name: '@capybaraarumao', url: 'https://x.com/capybaraarumao' },
 }
 
 // TODO: 依照你的經歷改寫自我介紹

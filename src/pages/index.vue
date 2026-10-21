@@ -123,6 +123,8 @@ onBeforeUnmount(() => {
 
   <footer class="footer">
     <p>© {{ new Date().getFullYear() }} {{ profile.name }}，以 Vue 3 與 TypeScript 製作。</p>
+    <!-- prettier-ignore -->
+    <p>頭像插畫：<a :href="profile.avatarCredit.url" target="_blank" rel="noreferrer">{{ profile.avatarCredit.name }}<span class="visually-hidden">（X，另開新視窗）</span></a></p>
   </footer>
 </template>
 
@@ -248,6 +250,10 @@ dd li {
   border-top: 1px solid var(--line);
   color: var(--muted);
   font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.25rem 2rem;
 }
 
 @media (min-width: 960px) {
