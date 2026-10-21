@@ -13,6 +13,7 @@ declare module 'vue' {
   export interface GlobalComponents {
     ExperienceTimeline: typeof import('./components/ExperienceTimeline.vue')['default']
     HeroBanner: typeof import('./components/HeroBanner.vue')['default']
+    PawTrail: typeof import('./components/PawTrail.vue')['default']
     ProjectItem: typeof import('./components/ProjectItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

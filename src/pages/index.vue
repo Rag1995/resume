@@ -61,31 +61,36 @@ onBeforeUnmount(() => {
     </aside>
 
     <main class="content">
-      <section id="about" aria-labelledby="about-title">
-        <h2 id="about-title">關於我</h2>
-        <div class="prose">
-          <p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p>
-        </div>
-      </section>
+      <!-- 腳印只走到「作品」結束，經歷區塊交給時間軸動畫 -->
+      <div class="trail-zone">
+        <PawTrail />
 
-      <section id="skills" aria-labelledby="skills-title">
-        <h2 id="skills-title">技能</h2>
-        <dl class="skills">
-          <div v-for="group in skillGroups" :key="group.title" class="skill-group">
-            <dt>{{ group.title }}</dt>
-            <dd>
-              <ul>
-                <li v-for="skill in group.items" :key="skill">{{ skill }}</li>
-              </ul>
-            </dd>
+        <section id="about" aria-labelledby="about-title">
+          <h2 id="about-title">關於我</h2>
+          <div class="prose">
+            <p v-for="paragraph in about" :key="paragraph">{{ paragraph }}</p>
           </div>
-        </dl>
-      </section>
+        </section>
 
-      <section id="projects" aria-labelledby="projects-title">
-        <h2 id="projects-title">作品</h2>
-        <ProjectItem v-for="project in projects" :key="project.title" :project="project" />
-      </section>
+        <section id="skills" aria-labelledby="skills-title">
+          <h2 id="skills-title">技能</h2>
+          <dl class="skills">
+            <div v-for="group in skillGroups" :key="group.title" class="skill-group">
+              <dt>{{ group.title }}</dt>
+              <dd>
+                <ul>
+                  <li v-for="skill in group.items" :key="skill">{{ skill }}</li>
+                </ul>
+              </dd>
+            </div>
+          </dl>
+        </section>
+
+        <section id="projects" aria-labelledby="projects-title">
+          <h2 id="projects-title">作品</h2>
+          <ProjectItem v-for="project in projects" :key="project.title" :project="project" />
+        </section>
+      </div>
 
       <section id="experience" aria-labelledby="experience-title">
         <h2 id="experience-title">經歷</h2>
@@ -131,6 +136,10 @@ onBeforeUnmount(() => {
 
 .sidebar-contact {
   display: none;
+}
+
+.trail-zone {
+  position: relative;
 }
 
 .content {
