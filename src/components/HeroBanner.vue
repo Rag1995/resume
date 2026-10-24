@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import avatar from '@/assets/avatar-256.webp'
+import avatar from '@/assets/avatar.webp'
 import banner768 from '@/assets/banner-768.webp'
 import banner1280 from '@/assets/banner-1280.webp'
 import banner1920 from '@/assets/banner-1920.webp'
@@ -28,7 +28,7 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 
     <div class="hero-text">
       <div class="identity">
-        <img class="avatar" :src="avatar" width="256" height="256" alt="戴眼鏡的狗獸人頭像插畫" />
+        <img class="avatar" :src="avatar" width="256" height="256" alt="手拿遊戲機、面帶微笑的狗獸人頭像插畫" />
         <h1>{{ profile.name }}</h1>
       </div>
       <p class="role">{{ profile.role }}，{{ profile.location }}</p>
