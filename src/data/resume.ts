@@ -1,6 +1,10 @@
 import cbsShot from '@/assets/projects/cbs.webp'
+import csqShot from '@/assets/projects/csq.webp'
 import dginfraShot from '@/assets/projects/dginfra.webp'
+import iotShot from '@/assets/projects/iot.webp'
+import mhs2Shot from '@/assets/projects/mhs2.webp'
 import slpShot from '@/assets/projects/slp.webp'
+import slpAdminShot from '@/assets/projects/slp-admin.webp'
 
 /**
  * 履歷內容集中在這個檔案。
@@ -35,6 +39,8 @@ export interface ProjectImage {
   src: string
   /** 描述圖片內容，給螢幕閱讀器與圖片載入失敗時使用 */
   alt: string
+  /** 圖片下方的簡短說明（選填），例如「前台」「後台」 */
+  caption?: string
 }
 
 export interface SourceLink {
@@ -48,8 +54,8 @@ export interface Project {
   summary: string
   highlights: string[]
   stack: string[]
-  /** 作品截圖（選填），有填才會顯示，依原圖比例呈現；建議寬 1200px 以上 */
-  image?: ProjectImage
+  /** 作品截圖（選填），依原圖比例呈現；多張時桌面版並排顯示。建議寬 1200px 以上 */
+  image?: ProjectImage | ProjectImage[]
   /** 網站已下線時設為 true：顯示「已下線」標籤，並隱藏線上版本連結 */
   offline?: boolean
   demo?: string
@@ -136,16 +142,24 @@ export const projects: Project[] = [
     title: '道路交通安全講習系統',
     year: '2023-2024',
     summary:
-      '公路局的道安講習線上系統。民眾可查詢全台受託單位的班次並自行預約講習；後台供管理受託單位、講師與講習結案。',
+      '公路局的道安講習線上系統。民眾可查詢全台受託單位的班次並自行預約講習；後台供管理受託單位、班期、師資與銷案作業。',
     highlights: [
       '負責民眾端預約流程、課後評量、以及前端頁面開發',
       '依地區、日期篩選全台受託單位的班次，讓民眾快速找到可報名的場次',
-      '負責後台帳密權限管理、受託單位與講師管理、講習結案與評量、QRCode掃碼報到等功能',
+      '負責後台帳密權限管理、受託單位管理、班期管理、師資管理、銷案管理與評量，以及 QR Code 掃碼報到等功能',
     ],
-    image: {
-      src: slpShot,
-      alt: '道路交通安全講習系統首頁，提供預約違規講習、申請扣點講習、查詢或取消報名紀錄、各縣市講習班查詢四個入口',
-    },
+    image: [
+      {
+        src: slpShot,
+        alt: '道路交通安全講習系統首頁，提供預約違規講習、申請扣點講習、查詢或取消報名紀錄、各縣市講習班查詢四個入口',
+        caption: '前台：民眾預約首頁',
+      },
+      {
+        src: slpAdminShot,
+        alt: '後台的編輯班期畫面，含班別、開班時間與授課講師設定，下方為學員報名清單與繳費、上課、銷案狀態（個資已模糊處理）',
+        caption: '後台：班期與學員管理',
+      },
+    ],
     stack: ['Vite', 'Vue 3', 'TypeScript', 'Naive UI'],
     demo: 'https://slp.mvdis.gov.tw/user/',
   },
@@ -166,6 +180,21 @@ export const projects: Project[] = [
     demo: 'https://cbs.tw/',
   },
   {
+    title: 'IoT 資訊彙整平台',
+    year: '2022',
+    summary: '災防示警機台的監控管理平台，將各地機台的狀態集中呈現在地圖與圖表上，協助管理人員即時掌握設備運作情形。',
+    highlights: [
+      '中途接手 Vue 2 版本的功能開發，同時參與從 Vue CLI 轉換到 Vite、Vue 3 與 TypeScript 的版本升級',
+      '依客戶需求與 API 文件串接後端，以 Leaflet 在地圖上標示各地災防示警機台與連線狀態，便於監控與管理',
+      '點選機台即可查看電量、溫度、訊號強度、SNR 等設備資訊，以 Highcharts 將數值視覺化，並以 Bootstrap 完成版面切版',
+    ],
+    image: {
+      src: iotShot,
+      alt: '資訊彙整平台管理畫面：左側為機台詳細資訊面板，含 Highcharts 儀表圖與電量、溫度、訊號強度等欄位；右側地圖以綠色點標示台灣各地的災防示警機台',
+    },
+    stack: ['Vue 2', 'Vite', 'Vue 3', 'TypeScript', 'Leaflet', 'Highcharts', 'Bootstrap'],
+  },
+  {
     title: '萌夯物語筆記',
     year: '2021',
     summary:
@@ -175,6 +204,10 @@ export const projects: Project[] = [
       '以 Sequelize 設計資料模型，透過 migration 與 seeder 管理資料庫結構與遊戲資料',
       '後端分為 router、controller、service 三層；原部署於 Heroku，免費方案終止後遷移至 Cyclic，資料庫使用 Nhost 提供的 PostgreSQL',
     ],
+    image: {
+      src: mhs2Shot,
+      alt: '萌夯物語筆記的基因盤畫面：左側為九宮格的基因配置，右側表格列出賓果加成數與對應的傷害倍率',
+    },
     stack: ['Vue 2', 'Vuex', 'Vue.Draggable', 'Bootstrap', 'Node.js', 'Express', 'Sequelize', 'PostgreSQL'],
     demo: 'https://rag1995.github.io/mhs2_note/#/',
     source: [
@@ -191,6 +224,10 @@ export const projects: Project[] = [
       '獨立完成前後端開發與部署：前台以 Vue 2 建置並部署於 Netlify，後端 API 部署於 Heroku，資料存放於 MongoDB',
       '開發計畫成果管理後台，讓非技術背景的同事能自行新增與更新成果內容',
     ],
+    image: {
+      src: csqShot,
+      alt: '形象官網首頁，主視覺為講座活動的大合照，中間為協會名稱與「與我們聯絡」按鈕',
+    },
     stack: ['Vue 2', 'Node.js', 'Express', 'MongoDB', 'Netlify', 'Heroku'],
     demo: 'https://friendly-dubinsky-acd3ce.netlify.app/',
   },

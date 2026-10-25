@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { Project, SourceLink } from '@/data/resume'
+import type { Project, ProjectImage, SourceLink } from '@/data/resume'
 
 const props = defineProps<{ project: Project }>()
+
+// 截圖可以是單張或多張，統一轉成陣列處理
+const images = computed<ProjectImage[]>(() => {
+  const { image } = props.project
+  if (!image) return []
+  return Array.isArray(image) ? image : [image]
+})
 
 // 單一網址轉成一個「查看原始碼」連結；陣列則照原樣使用
 const sourceLinks = computed<SourceLink[]>(() => {
@@ -22,9 +29,12 @@ const sourceLinks = computed<SourceLink[]>(() => {
         <span class="year">{{ project.year }}</span>
       </span>
     </div>
-    <figure v-if="project.image" class="shot">
-      <img :src="project.image.src" :alt="project.image.alt" loading="lazy" decoding="async" />
-    </figure>
+    <div v-if="images.length" class="shots" :class="{ multi: images.length > 1 }">
+      <figure v-for="img in images" :key="img.src" class="shot">
+        <img :src="img.src" :alt="img.alt" loading="lazy" decoding="async" />
+        <figcaption v-if="img.caption">{{ img.caption }}</figcaption>
+      </figure>
+    </div>
     <p class="summary">{{ project.summary }}</p>
     <ul class="highlights">
       <li v-for="item in project.highlights" :key="item">{{ item }}</li>
@@ -86,9 +96,22 @@ h3 {
   font-variant-numeric: tabular-nums;
 }
 
-/* 作品截圖：依原圖比例完整呈現，不裁切 */
+/* 作品截圖：依原圖比例完整呈現，不裁切；多張時桌面版並排 */
+.shots {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .shots.multi {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+  }
+}
+
 .shot {
-  margin: 0.75rem 0 0;
+  margin: 0;
   overflow: hidden;
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -99,6 +122,13 @@ h3 {
   display: block;
   width: 100%;
   height: auto;
+}
+
+.shot figcaption {
+  padding: 0.35rem 0.75rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
 }
 
 .summary {
