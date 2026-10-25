@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import avatar from '@/assets/avatar.webp'
+import banner768Avif from '@/assets/banner-768.avif'
 import banner768 from '@/assets/banner-768.webp'
+import banner1280Avif from '@/assets/banner-1280.avif'
 import banner1280 from '@/assets/banner-1280.webp'
+import banner1920Avif from '@/assets/banner-1920.avif'
 import banner1920 from '@/assets/banner-1920.webp'
 import type { Profile } from '@/data/resume'
 
 defineProps<{ profile: Profile }>()
 
+// 支援 AVIF 的瀏覽器優先載入（檔案約小 40%），其餘退回 WebP
+const avifSrcset = `${banner768Avif} 768w, ${banner1280Avif} 1280w, ${banner1920Avif} 1920w`
 const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 </script>
 
@@ -14,22 +19,30 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
   <header class="hero">
     <div class="hero-art">
       <div class="hero-scroll">
-        <img
-          :src="banner1280"
-          :srcset="srcset"
-          sizes="100vw"
-          width="1920"
-          height="1080"
-          alt="一群手繪角色在光芒下排成一列的插畫"
-          fetchpriority="high"
-        />
+        <picture>
+          <source type="image/avif" :srcset="avifSrcset" sizes="100vw" />
+          <img
+            :src="banner1280"
+            :srcset="srcset"
+            sizes="100vw"
+            width="1920"
+            height="1080"
+            alt="一群手繪角色在光芒下排成一列的插畫"
+            fetchpriority="high"
+          />
+        </picture>
       </div>
     </div>
 
     <div class="hero-text">
       <div class="identity">
         <img class="avatar" :src="avatar" width="256" height="256" alt="手拿遊戲機、面帶微笑的狗獸人頭像插畫" />
-        <h1>{{ profile.name }}</h1>
+        <h1>
+          <span class="name-zh">{{ profile.name }}</span>
+          <!-- 讓螢幕閱讀器與搜尋引擎讀到兩個名字之間的空格 -->
+          <span class="visually-hidden">{{ ' ' }}</span>
+          <span class="name-en" lang="en">{{ profile.nameEn }}</span>
+        </h1>
       </div>
       <p class="role">{{ profile.role }}，{{ profile.location }}</p>
       <p class="tagline">{{ profile.tagline }}</p>
@@ -56,6 +69,11 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 
 .hero-scroll {
   height: 100%;
+}
+
+/* picture 本身不佔版面，讓 img 直接以 .hero-scroll 為尺寸基準 */
+.hero-scroll picture {
+  display: contents;
 }
 
 .hero-art img {
@@ -94,7 +112,7 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 /* 頭像高度約與名字的字高相同，外圈用背景色隔開插畫 */
 .avatar {
   flex: none;
-  width: clamp(4.5rem, 2.5rem + 6vw, 7.5rem);
+  width: clamp(4rem, 2.5rem + 4vw, 6rem);
   height: auto;
   aspect-ratio: 1;
   border-radius: 50%;
@@ -103,10 +121,27 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
   background: var(--surface);
 }
 
+/* 中文名字比英文字母飽滿，字級不宜過大；字距稍微放寬較易讀 */
 h1 {
-  font-size: clamp(3.5rem, 2rem + 8vw, 7.5rem);
-  line-height: 1;
-  letter-spacing: -0.01em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.4em;
+  font-size: clamp(2.5rem, 1.5rem + 4vw, 4.5rem);
+  line-height: 1.1;
+}
+
+.name-zh {
+  letter-spacing: 0.04em;
+}
+
+/* 英文名字：小字、內文字型、次要顏色，作為中文名字的補充 */
+.name-en {
+  font-family: var(--font-body);
+  font-size: 0.36em;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--muted);
 }
 
 .role {

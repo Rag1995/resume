@@ -4,6 +4,10 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 import type { NavItem } from '@/data/resume'
 import { about, experiences, profile, projects, skillGroups } from '@/data/resume'
 
+// 主要作品完整呈現；標記 compact 的作品放到「其他作品」精簡列表
+const mainProjects = projects.filter((project) => !project.compact)
+const otherProjects = projects.filter((project) => project.compact)
+
 const navItems: NavItem[] = [
   { id: 'about', label: '關於我' },
   { id: 'skills', label: '技能' },
@@ -101,7 +105,11 @@ onBeforeUnmount(() => {
 
         <section id="projects" aria-labelledby="projects-title">
           <h2 id="projects-title">作品</h2>
-          <ProjectItem v-for="project in projects" :key="project.title" :project="project" />
+          <ProjectItem v-for="project in mainProjects" :key="project.title" :project="project" />
+          <div v-if="otherProjects.length" class="other-projects">
+            <h3>其他作品</h3>
+            <ProjectCompact v-for="project in otherProjects" :key="project.title" :project="project" />
+          </div>
         </section>
       </div>
 
@@ -186,6 +194,17 @@ section {
 h2 {
   font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.4rem);
   margin-bottom: 1.5rem;
+}
+
+/* 其他作品：和主要作品之間拉開距離，標題較小 */
+.other-projects {
+  margin-top: 3rem;
+}
+
+.other-projects h3 {
+  margin-bottom: 0.5rem;
+  font-size: 1.35rem;
+  color: var(--muted);
 }
 
 .prose {

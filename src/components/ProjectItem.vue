@@ -1,23 +1,14 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 
-import type { Project, ProjectImage, SourceLink } from '@/data/resume'
+import type { Project } from '@/data/resume'
+import { getDemoLink, getProjectImages, getSourceLinks } from '@/utils/project'
 
 const props = defineProps<{ project: Project }>()
 
-// 截圖可以是單張或多張，統一轉成陣列處理
-const images = computed<ProjectImage[]>(() => {
-  const { image } = props.project
-  if (!image) return []
-  return Array.isArray(image) ? image : [image]
-})
-
-// 單一網址轉成一個「查看原始碼」連結；陣列則照原樣使用
-const sourceLinks = computed<SourceLink[]>(() => {
-  const { source } = props.project
-  if (!source) return []
-  return typeof source === 'string' ? [{ label: '查看原始碼', url: source }] : source
-})
+const images = computed(() => getProjectImages(props.project))
+const sourceLinks = computed(() => getSourceLinks(props.project))
+const demo = computed(() => getDemoLink(props.project))
 </script>
 
 <template>
@@ -31,7 +22,7 @@ const sourceLinks = computed<SourceLink[]>(() => {
     </div>
     <div v-if="images.length" class="shots" :class="{ multi: images.length > 1 }">
       <figure v-for="img in images" :key="img.src" class="shot">
-        <img :src="img.src" :alt="img.alt" loading="lazy" decoding="async" />
+        <img :src="img.src" :alt="img.alt" :width="img.width" :height="img.height" loading="lazy" decoding="async" />
         <figcaption v-if="img.caption">{{ img.caption }}</figcaption>
       </figure>
     </div>
@@ -43,8 +34,8 @@ const sourceLinks = computed<SourceLink[]>(() => {
       <span class="visually-hidden">使用技術：</span>
       <span v-for="tech in project.stack" :key="tech" class="tech">{{ tech }}</span>
     </p>
-    <p v-if="(project.demo && !project.offline) || sourceLinks.length" class="links">
-      <a v-if="project.demo && !project.offline" :href="project.demo" target="_blank" rel="noreferrer">
+    <p v-if="demo || sourceLinks.length" class="links">
+      <a v-if="demo" :href="demo" target="_blank" rel="noreferrer">
         <ITablerWorld class="icon" aria-hidden="true" />查看線上版本<span class="visually-hidden"
           >（{{ project.title }}，另開新視窗）</span
         >

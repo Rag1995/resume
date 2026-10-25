@@ -17,6 +17,7 @@ declare module 'vue' {
     ITablerMail: typeof import('~icons/tabler/mail')['default']
     ITablerWorld: typeof import('~icons/tabler/world')['default']
     PawTrail: typeof import('./components/PawTrail.vue')['default']
+    ProjectCompact: typeof import('./components/ProjectCompact.vue')['default']
     ProjectItem: typeof import('./components/ProjectItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']

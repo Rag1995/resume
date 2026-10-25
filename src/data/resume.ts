@@ -1,7 +1,9 @@
+import cbeShot from '@/assets/projects/cbe.webp'
 import cbsShot from '@/assets/projects/cbs.webp'
 import csqShot from '@/assets/projects/csq.webp'
 import dginfraShot from '@/assets/projects/dginfra.webp'
 import iotShot from '@/assets/projects/iot.webp'
+import kpiShot from '@/assets/projects/kpi.webp'
 import mhs2Shot from '@/assets/projects/mhs2.webp'
 import slpShot from '@/assets/projects/slp.webp'
 import slpAdminShot from '@/assets/projects/slp-admin.webp'
@@ -18,6 +20,8 @@ export interface NavItem {
 
 export interface Profile {
   name: string
+  /** 英文名字，顯示在中文名字旁 */
+  nameEn: string
   role: string
   tagline: string
   location: string
@@ -41,6 +45,9 @@ export interface ProjectImage {
   alt: string
   /** 圖片下方的簡短說明（選填），例如「前台」「後台」 */
   caption?: string
+  /** 原圖寬高：讓瀏覽器在圖片載入前先預留空間，避免版面跳動 */
+  width: number
+  height: number
 }
 
 export interface SourceLink {
@@ -65,6 +72,8 @@ export interface Project {
    * 前後端分開時填陣列，各自設定連結文字。
    */
   source?: string | SourceLink[]
+  /** 設為 true 時移到「其他作品」精簡列表，只顯示標題、年份、介紹、技術與連結 */
+  compact?: boolean
 }
 
 export interface Experience {
@@ -76,6 +85,7 @@ export interface Experience {
 
 export const profile: Profile = {
   name: '郭哲彣',
+  nameEn: 'Taylor Kuo',
   role: '前端工程師',
   tagline: '把設計稿變成好用、好讀、載入快的介面。',
   location: '基隆',
@@ -121,7 +131,7 @@ export const projects: Project[] = [
     year: '2026',
     summary: '你正在看的這個網站。以 Vue 3 + TypeScript 打造，內容與畫面分離，改一個資料檔就能更新履歷。',
     highlights: [
-      '主視覺圖片從 2.1 MB 壓縮到 270 KB 以下，並依螢幕寬度載入不同尺寸',
+      '主視覺圖片從 2.1 MB 壓縮至約 160 KB：以 <picture> 優先提供 AVIF，並以 WebP 作為備援，依螢幕寬度載入不同尺寸',
       '側邊導覽會隨捲動標示目前閱讀的段落',
       '主視覺退場、狗腳印步道與經歷時間軸以 CSS scroll-driven animations 實作，零 JS 且不支援的瀏覽器自動退回靜態',
       '支援深色模式、鍵盤操作與 prefers-reduced-motion',
@@ -130,11 +140,50 @@ export const projects: Project[] = [
     source: 'https://github.com/Rag1995/my-resume',
   },
   {
+    title: '線上績效管理系統平台',
+    year: '2025',
+    summary: '管理資訊服務廠商與其客戶的績效管理平台，可追蹤各廠商的 KPI 達成率，並審核廠商提報的客戶資料。',
+    highlights: [
+      '負責前端頁面切版與 API 串接，包含廠商與客戶管理、KPI 統計、客戶審核與帳號管理',
+      '開發階段以 Node.js 建立模擬 API：用 Faker 快速產生假資料、Swagger 產生 API 文件，並以 bcrypt 雜湊密碼建立帳號、JWT 實作登入驗證，讓客戶在正式 API 完成前即可操作 demo',
+    ],
+    image: {
+      src: kpiShot,
+      alt: '線上績效管理系統的資服廠商列表：上方為廠商總數、KPI 數值、已過審客戶、待審核客戶與 KPI 達成率等統計卡片，下方為可切換狀態、查看客戶與審核的廠商表格（資料已模糊處理）',
+      width: 1600,
+      height: 786,
+    },
+    stack: ['Node.js', 'Faker', 'Swagger', 'bcrypt', 'JWT'],
+  },
+  {
+    title: '災害訊息廣播平台',
+    year: '2024-2025',
+    summary: '災害告警訊息的收發管理平台，管理人員可設定告警的發送區域，並管理訊息發布、帳號權限與歷史紀錄。',
+    highlights: [
+      '負責平台全部功能的前端頁面開發並串接 API，包含訊息發布、告警監控儀表板、帳號與權限管理、報表與歷史資料查詢',
+      '以 Leaflet-Geoman 實作地圖圈選工具，讓使用者繪製、編輯、裁切告警的發送範圍，並可依縣市、區域、鄉鎮選擇行政區',
+      '後端 API 尚待與客戶確認資料庫轉移與權限設計時，以 NestJS 搭配 TypeORM 建立模擬 API 與假資料，讓前端先行開發並即時向客戶展示進度；正式 API 完成後，只需調整路徑與欄位即可切換',
+    ],
+    image: {
+      src: cbeShot,
+      alt: '災害訊息廣播平台的區域代碼設定畫面：右側資料維護視窗可選擇縣市、區域與鄉鎮，下方地圖以 Leaflet-Geoman 工具列繪製彰化、南投與臺中的發送範圍',
+      width: 960,
+      height: 560,
+    },
+    stack: ['Vue 3', 'Tailwind CSS', 'daisyUI', 'Leaflet', 'Leaflet-Geoman', 'NestJS', 'TypeORM'],
+  },
+  {
+    compact: true,
     title: '軟體基盤平台',
     year: '2024',
     summary: '提供資訊服務業者算力、數據與程式碼資源的公共數位基礎設施',
     highlights: ['前端切版與API串接', '使用 Tailwind CSS 與 daisyUI 建立共用元件庫'],
-    image: { src: dginfraShot, alt: '軟體數位基盤網站的計畫介紹頁，上方為導覽列與橫幅，下方為計畫緣起說明' },
+    image: {
+      src: dginfraShot,
+      alt: '軟體數位基盤網站的計畫介紹頁，上方為導覽列與橫幅，下方為計畫緣起說明',
+      width: 1600,
+      height: 743,
+    },
     stack: ['Vite', 'Vue 3', 'Tailwind CSS', 'daisyUI'],
     offline: true,
   },
@@ -152,11 +201,15 @@ export const projects: Project[] = [
       {
         src: slpShot,
         alt: '道路交通安全講習系統首頁，提供預約違規講習、申請扣點講習、查詢或取消報名紀錄、各縣市講習班查詢四個入口',
+        width: 1600,
+        height: 900,
         caption: '前台：民眾預約首頁',
       },
       {
         src: slpAdminShot,
         alt: '後台的編輯班期畫面，含班別、開班時間與授課講師設定，下方為學員報名清單與繳費、上課、銷案狀態（個資已模糊處理）',
+        width: 945,
+        height: 532,
         caption: '後台：班期與學員管理',
       },
     ],
@@ -175,6 +228,8 @@ export const projects: Project[] = [
     image: {
       src: cbsShot,
       alt: '災防告警細胞廣播訊息網站首頁，主視覺為從手機發出警訊的擴音器插圖，右上角有英文版切換',
+      width: 1600,
+      height: 747,
     },
     stack: ['Vue 2', 'Vite', 'Vue 3', 'i18n', 'Leaflet', 'Mapbox', 'GeoJSON'],
     demo: 'https://cbs.tw/',
@@ -191,10 +246,13 @@ export const projects: Project[] = [
     image: {
       src: iotShot,
       alt: '資訊彙整平台管理畫面：左側為機台詳細資訊面板，含 Highcharts 儀表圖與電量、溫度、訊號強度等欄位；右側地圖以綠色點標示台灣各地的災防示警機台',
+      width: 1600,
+      height: 874,
     },
     stack: ['Vue 2', 'Vite', 'Vue 3', 'TypeScript', 'Leaflet', 'Highcharts', 'Bootstrap'],
   },
   {
+    compact: true,
     title: '萌夯物語筆記',
     year: '2021',
     summary:
@@ -207,6 +265,8 @@ export const projects: Project[] = [
     image: {
       src: mhs2Shot,
       alt: '萌夯物語筆記的基因盤畫面：左側為九宮格的基因配置，右側表格列出賓果加成數與對應的傷害倍率',
+      width: 704,
+      height: 394,
     },
     stack: ['Vue 2', 'Vuex', 'Vue.Draggable', 'Bootstrap', 'Node.js', 'Express', 'Sequelize', 'PostgreSQL'],
     demo: 'https://rag1995.github.io/mhs2_note/#/',
@@ -216,6 +276,7 @@ export const projects: Project[] = [
     ],
   },
   {
+    compact: true,
     title: '社團法人中華服務品質發展協會 - 形象官網',
     year: '2021',
     summary:
@@ -227,9 +288,25 @@ export const projects: Project[] = [
     image: {
       src: csqShot,
       alt: '形象官網首頁，主視覺為講座活動的大合照，中間為協會名稱與「與我們聯絡」按鈕',
+      width: 704,
+      height: 396,
     },
     stack: ['Vue 2', 'Node.js', 'Express', 'MongoDB', 'Netlify', 'Heroku'],
     demo: 'https://friendly-dubinsky-acd3ce.netlify.app/',
+  },
+  {
+    compact: true,
+    title: '口罩地圖',
+    year: '2020',
+    summary:
+      '轉職初期學習 Vue 的練習專案。疫情期間串接口罩即時庫存資料，在地圖上查詢附近藥局的口罩存量。資料 API 架設於 Heroku，隨免費方案終止而停止服務。',
+    highlights: [
+      '以 Leaflet 搭配 CARTO 圖資標示全台藥局，並用 Marker Cluster 將大量標記聚合，改善地圖效能',
+      '實作載入時的骨架畫面、藥局詳細資料抽屜與營業時間表，並修正手機瀏覽器 100vh 的版面問題',
+    ],
+    stack: ['Vue 2', 'Vuex', 'Leaflet', 'Leaflet.markercluster', 'CARTO'],
+    offline: true,
+    source: 'https://github.com/Rag1995/mask_map',
   },
 ]
 
