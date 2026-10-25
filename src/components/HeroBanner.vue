@@ -85,6 +85,20 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
   animation: settle 1.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
 
+/*
+ * 頂端由 --banner-top 漸變到透明。Mac 回彈時露出的 html 背景也是這個顏色（見 style.css），
+ * 兩者在交界處同色，就看不出接縫。
+ */
+.hero-art::before {
+  content: '';
+  position: absolute;
+  z-index: 1;
+  inset: 0 0 auto;
+  height: 4rem;
+  background: linear-gradient(to bottom, var(--banner-top), transparent);
+  pointer-events: none;
+}
+
 /* 讓插畫底部的反光地板直接融進頁面背景 */
 .hero-art::after {
   content: '';

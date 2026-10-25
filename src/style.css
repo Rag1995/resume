@@ -43,6 +43,22 @@
   }
 }
 
+/*
+ * Mac 觸控板在頁面頂端往上拉時會出現回彈（elastic overscroll），
+ * 被拉出的空間顯示的是 html 的背景色。
+ * 在頁面上半段（由 index.vue 的捲動偵測加上 .near-top）把 html 背景設成
+ * 主視覺頂端的天空色，往上拉時看起來像插畫延伸；捲過半個視窗後恢復頁面底色，
+ * 頁尾往下拉時就和頁尾銜接。body 有自己的背景，所以平常看不到 html 的背景。
+ */
+:root {
+  /* 主視覺頂端可見區域的平均色；HeroBanner 頂端的漸層也用同一個顏色，接縫才會消失 */
+  --banner-top: #a6a0b8;
+}
+
+:root.near-top {
+  background-color: var(--banner-top);
+}
+
 *,
 *::before,
 *::after {

@@ -43,6 +43,9 @@ function updateActive() {
     current = 'contact'
   }
   activeId.value = current
+
+  // 頁面上半段時讓 html 背景與主視覺同色，Mac 回彈時才不會露出一塊空白（樣式見 style.css）
+  document.documentElement.classList.toggle('near-top', window.scrollY < window.innerHeight / 2)
 }
 
 function onScroll() {
@@ -57,6 +60,7 @@ onMounted(() => {
 })
 
 onBeforeUnmount(() => {
+  document.documentElement.classList.remove('near-top')
   resizeObserver?.disconnect()
   window.removeEventListener('scroll', onScroll)
   cancelAnimationFrame(frame)
