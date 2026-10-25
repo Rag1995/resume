@@ -35,6 +35,8 @@ export interface Profile {
 
 export interface SkillGroup {
   title: string
+  /** 組名下方的小字說明（選填），例如使用情境 */
+  note?: string
   items: string[]
 }
 
@@ -114,6 +116,13 @@ export const skillGroups: SkillGroup[] = [
   {
     title: '樣式與 UI 套件',
     items: ['Tailwind CSS', 'UnoCSS', 'daisyUI', 'Naive UI', 'Bootstrap 5'],
+  },
+  {
+    // 主要用於模擬 API 與 Side Project，寫清楚用途，避免被當成專職後端
+    title: '後端',
+    // Side 與 Project 之間用不換行空格，避免在兩字之間斷行
+    note: '模擬 API 與 Side\u00a0Project',
+    items: ['Node.js', 'Express', 'NestJS', 'Sequelize', 'TypeORM', 'PostgreSQL', 'MongoDB', 'Swagger', 'JWT'],
   },
   {
     title: 'AI 工具',

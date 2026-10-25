@@ -97,7 +97,10 @@ onBeforeUnmount(() => {
           <h2 id="skills-title">技能</h2>
           <dl class="skills">
             <div v-for="group in skillGroups" :key="group.title" class="skill-group">
-              <dt>{{ group.title }}</dt>
+              <dt>
+                {{ group.title }}
+                <span v-if="group.note" class="skill-note">{{ group.note }}</span>
+              </dt>
               <dd>
                 <ul>
                   <li v-for="skill in group.items" :key="skill">{{ skill }}</li>
@@ -235,6 +238,14 @@ h2 {
 
 dt {
   color: var(--muted);
+}
+
+.skill-note {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  opacity: 0.85;
 }
 
 dd {
