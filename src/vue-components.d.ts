@@ -15,6 +15,7 @@ declare module 'vue' {
     HeroBanner: typeof import('./components/HeroBanner.vue')['default']
     ITablerBrandGithub: typeof import('~icons/tabler/brand-github')['default']
     ITablerMail: typeof import('~icons/tabler/mail')['default']
+    ITablerWorld: typeof import('~icons/tabler/world')['default']
     PawTrail: typeof import('./components/PawTrail.vue')['default']
     ProjectItem: typeof import('./components/ProjectItem.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
