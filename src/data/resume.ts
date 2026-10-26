@@ -89,19 +89,19 @@ export const profile: Profile = {
   name: '郭哲彣',
   nameEn: 'Taylor Kuo',
   role: '前端工程師',
-  tagline: '把設計稿變成好用、好讀、載入快的介面。',
+  tagline: '從興趣開始的前端工程師，現在專注 Vue，擅長管理平台與地圖應用。',
   location: '基隆',
-  status: '正在尋找前端工程師職位',
+  status: '正在尋找前端工程師職位，偏好遠端或混合辦公',
   email: 'taipeiyyy@gmail.com',
   github: 'https://github.com/Rag1995',
   githubLabel: 'github.com/Rag1995',
   avatarCredit: { name: 'アル毛（@capybaraarumao）', url: 'https://x.com/capybaraarumao' },
 }
 
-// TODO: 依照你的經歷改寫自我介紹
 export const about: string[] = [
-  '我是一名專注於 Vue 與 TypeScript 的前端工程師，喜歡把複雜的流程整理成使用者一看就懂的畫面。',
-  '寫介面時，我在意的不只是「長得像設計稿」，還有鍵盤能不能操作、手機上好不好點、首次載入要等多久。這個網站本身就是一個例子：圖片經過壓縮與響應式載入，支援深色模式與減少動態效果設定。',
+  '我是一名前端工程師，專注於 Vue 與 TypeScript。職涯從數據專員起步，以 VBA 與 Power BI 將報表和排班自動化，之後轉職前端；自 2022 年起參與災防告警、道安講習、績效管理等政府與企業平台的開發，2023 年後以接案方式持續合作。',
+  '接手既有專案並推進升級，經歷過 Vue 2 遷移至 Vue 3；也熟悉 Leaflet 地圖應用，做過警報範圍繪製與機台監控地圖。後端 API 尚未完成時，我會自建模擬 API 讓前端先行開發，讓客戶及早看到進度。',
+  '我習慣用 Claude Code 搭配 Agent Skills 建立開發流程：先讓 AI 質疑需求與計畫，再拆解步驟、以測試驅動實作，最後自己審查每一段程式碼。AI 幫我加快速度，但架構判斷與品質把關由我負責。',
 ]
 
 export const skillGroups: SkillGroup[] = [
@@ -110,7 +110,7 @@ export const skillGroups: SkillGroup[] = [
     items: ['Vue 3', 'TypeScript', 'JavaScript', 'HTML', 'CSS / SCSS'],
   },
   {
-    title: 'Tech Stack',
+    title: '工具與函式庫',
     items: ['Vite', 'Pinia', 'Vue Router 5', 'VueUse', 'i18n', 'Leaflet', 'ESLint', 'Prettier'],
   },
   {
@@ -130,7 +130,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: '工作方式',
-    items: ['響應式設計', '網頁效能優化', 'Git 協作', 'Figma 交接'],
+    items: ['響應式設計 RWD', 'Git 協作', 'Figma 交接'],
   },
 ]
 
@@ -202,8 +202,7 @@ export const projects: Project[] = [
     summary:
       '公路局的道安講習線上系統。民眾可查詢全台受託單位的班次並自行預約講習；後台供管理受託單位、班期、師資與銷案作業。',
     highlights: [
-      '負責民眾端預約流程、課後評量、以及前端頁面開發',
-      '依地區、日期篩選全台受託單位的班次，讓民眾快速找到可報名的場次',
+      '負責民眾端預約流程、課後評量、以及前端頁面開發，依地區、日期篩選全台受託單位的班次，讓民眾快速找到可報名的場次',
       '負責後台帳密權限管理、受託單位管理、班期管理、師資管理、銷案管理與評量，以及 QR Code 掃碼報到等功能',
     ],
     image: [
@@ -232,7 +231,8 @@ export const projects: Project[] = [
     highlights: [
       '參與 Vue 2 專案維護，並協助將專案改寫為 Vue 3',
       '導入 vue-i18n 建立多語系架構，支援繁中與英文切換，並將既有頁面文字抽離為語系檔',
-      '擴增警訊頁面的地圖資訊：將圖資轉換為 GeoJSON，以 Leaflet 繪製警報發送範圍，讓民眾一眼看出哪些地區收到警訊',
+      '擴增警訊頁面的地圖資訊：將圖資轉換為 GeoJSON，以 Leaflet 繪製警報發送範圍讓民眾一眼看出哪些地區收到警訊',
+      '依客戶需求將底圖由 OpenStreetMap 替換為 Mapbox，並以 Mapbox Studio 自訂樣式，修正行政區名稱錯誤與英文標籤，讓民眾能正確辨識地名',
     ],
     image: {
       src: cbsShot,
@@ -311,7 +311,7 @@ export const projects: Project[] = [
       '轉職初期學習 Vue 的練習專案。疫情期間串接口罩即時庫存資料，在地圖上查詢附近藥局的口罩存量。資料 API 架設於 Heroku，隨免費方案終止而停止服務。',
     highlights: [
       '以 Leaflet 搭配 CARTO 圖資標示全台藥局，並用 Marker Cluster 將大量標記聚合，改善地圖效能',
-      '實作載入時的骨架畫面、藥局詳細資料抽屜與營業時間表，並修正手機瀏覽器 100vh 的版面問題',
+      '實作載入時的骨架畫面、藥局詳細資料抽屜與營業時間表，並支援手機瀏覽',
     ],
     stack: ['Vue 2', 'Vuex', 'Leaflet', 'Leaflet.markercluster', 'CARTO'],
     offline: true,
@@ -319,18 +319,35 @@ export const projects: Project[] = [
   },
 ]
 
-// TODO: 換成你的真實經歷（由新到舊）
 export const experiences: Experience[] = [
   {
-    period: '2024 年至今',
-    company: '某科技公司',
+    period: '2023 – 2025',
+    company: '自由接案（遠端）',
     title: '前端工程師',
-    highlights: ['負責後台系統的前端開發與元件庫維護', '導入 TypeScript 與 ESLint 規範，減少上線後的型別相關錯誤'],
+    highlights: [
+      '轉為接案後持續與光沅數位創意合作，以遠端方式負責政府與企業專案的前端開發',
+      '參與道路交通安全講習系統、災害訊息廣播平台、線上績效管理系統平台等專案，負責前端頁面開發與 API 串接',
+      '在後端 API 尚未完成時，以 Node.js 自建模擬 API 與假資料，讓前端先行開發並即時向客戶展示進度',
+    ],
   },
   {
-    period: '2022 – 2024',
-    company: '某數位設計工作室',
-    title: '網頁設計與切版',
-    highlights: ['與設計師合作完成多個品牌形象網站的切版與互動', '建立共用的 SCSS 變數與 RWD 斷點規範'],
+    period: '2022 – 2023',
+    company: '光沅數位創意 Kyart Creative',
+    title: '前端工程師',
+    highlights: [
+      '以 Vue 2/Vue 3、Vite 與 TypeScript 開發與維護國家災防資訊彙整平台及其管理平台',
+      '參與 Vue 2 專案遷移至 Vue 3',
+    ],
+  },
+  {
+    period: '2019 – 2021',
+    company: '全鋒汽車股份有限公司',
+    title: '數據專員',
+    highlights: [
+      '以 Power BI 搭配 VBA 自動化客服月報，原需 2–3 人耗時 3–4 個工作天彙整，縮短為約半天',
+      '導入 Power BI 建立服務量能、專案績效與客戶服務等儀表板，讓主管隨時查詢數據、作為決策依據',
+      '以 VBA 自動從 NAS 讀取各部門 Excel 並彙整報表。開發排班工具，依歷年各季話務量預估人力需求並產生班表雛形',
+      '開發專案形象官網，以 Vue 2 建置並部署於 Netlify',
+    ],
   },
 ]

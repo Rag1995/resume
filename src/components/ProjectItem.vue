@@ -126,14 +126,16 @@ h3 {
   margin-top: 0.75rem;
 }
 
+/* 點內行距收緊、點與點之間拉開，換行時才分得出是同一點還是下一點 */
 .highlights {
   margin-top: 0.75rem;
   padding-left: 1.2rem;
   color: var(--muted);
+  line-height: 1.6;
 }
 
 .highlights li + li {
-  margin-top: 0.25rem;
+  margin-top: 0.6rem;
 }
 
 .stack {

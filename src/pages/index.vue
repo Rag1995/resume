@@ -127,7 +127,7 @@ onBeforeUnmount(() => {
 
       <section id="contact" class="contact" aria-labelledby="contact-title">
         <h2 id="contact-title">聯絡</h2>
-        <p class="contact-lead">{{ profile.status }}，歡迎來信聊聊職缺或合作。</p>
+        <p class="contact-lead">{{ profile.status }}。歡迎來信聊聊職缺或合作。</p>
         <div class="contact-actions">
           <a class="button" :href="`mailto:${profile.email}`">
             <ITablerMail class="icon" aria-hidden="true" />寄信給我

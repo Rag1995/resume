@@ -141,8 +141,14 @@ h3 {
   color: var(--muted);
 }
 
+/* 與作品 highlights 相同：點內行距收緊、點與點之間拉開 */
 ul {
   margin-top: 0.5rem;
   padding-left: 1.2rem;
+  line-height: 1.6;
+}
+
+ul li + li {
+  margin-top: 0.6rem;
 }
 </style>

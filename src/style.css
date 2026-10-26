@@ -92,6 +92,13 @@ ol {
   margin: 0;
 }
 
+/* 讓瀏覽器微調斷行，避免段落最後一行只剩一兩個字（孤字）；不支援的瀏覽器維持原樣 */
+p,
+li,
+dd {
+  text-wrap: pretty;
+}
+
 a {
   color: var(--accent);
   text-underline-offset: 0.2em;
