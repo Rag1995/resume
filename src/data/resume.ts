@@ -148,7 +148,7 @@ export const projects: Project[] = [
     ],
     stack: ['Vite', 'Vue 3', 'TypeScript', 'Claude'],
     source: [
-      { label: '查看原始碼', url: 'https://github.com/Rag1995/my-resume' },
+      { label: '查看原始碼', url: 'https://github.com/Rag1995/resume' },
       { label: '查看專案範本', url: 'https://github.com/Rag1995/vite-template' },
     ],
   },

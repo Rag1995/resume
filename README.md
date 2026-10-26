@@ -2,7 +2,7 @@
 
 我的個人履歷網站。過去的專案一直沒有好好彙整，因此做了這份線上履歷，集中介紹我的經歷、技能與作品。
 
-🔗 **網站：** https://rag1995.github.io/my-resume/
+🔗 **網站：** https://rag1995.github.io/resume/
 
 ## 技術
 
@@ -25,12 +25,12 @@
 
 ```bash
 npm install
-npm run dev      # 開發伺服器：http://localhost:5173/my-resume/
+npm run dev      # 開發伺服器：http://localhost:5173/resume/
 npm run build    # 型別檢查並打包到 dist/
 npm run preview  # 預覽打包結果
 ```
 
-> 因為部署在 GitHub Pages 的子路徑底下，`vite.config.ts` 設定了 `base: '/my-resume/'`，本機網址也需要加上 `/my-resume/`。
+> 因為部署在 GitHub Pages 的子路徑底下，`vite.config.ts` 設定了 `base: '/resume/'`，本機網址也需要加上 `/resume/`。
 
 ## 更新履歷內容
 
