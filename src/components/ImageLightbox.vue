@@ -11,11 +11,14 @@ const props = defineProps<{ images: ProjectImage[]; title: string }>()
 
 const dialog = useTemplateRef<HTMLDialogElement>('dialog')
 const index = ref(0)
+// 燈箱開啟時才渲染圖片，避免頁面載入時就下載所有截圖
+const isOpen = ref(false)
 const current = computed(() => props.images[index.value])
 const hasMany = computed(() => props.images.length > 1)
 
 function open(i: number) {
   index.value = i
+  isOpen.value = true
   dialog.value?.showModal()
 }
 
@@ -43,8 +46,15 @@ defineExpose({ open })
 </script>
 
 <template>
-  <dialog ref="dialog" class="lightbox" :aria-label="`${title} 截圖`" @click="onClick" @keydown="onKeydown">
-    <figure v-if="current" class="frame">
+  <dialog
+    ref="dialog"
+    class="lightbox"
+    :aria-label="`${title} 截圖`"
+    @click="onClick"
+    @keydown="onKeydown"
+    @close="isOpen = false"
+  >
+    <figure v-if="isOpen && current" class="frame">
       <img :src="current.src" :alt="current.alt" :width="current.width" :height="current.height" />
       <figcaption v-if="current.caption || hasMany">
         <span v-if="current.caption">{{ current.caption }}</span>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import avatar from '@/assets/avatar.webp'
+import avatar from '@/assets/avatar-192.webp'
 import banner768Avif from '@/assets/banner-768.avif'
 import banner768 from '@/assets/banner-768.webp'
 import banner1280Avif from '@/assets/banner-1280.avif'
@@ -36,7 +36,7 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 
     <div class="hero-text">
       <div class="identity">
-        <img class="avatar" :src="avatar" width="256" height="256" alt="手拿遊戲機、面帶微笑的狗獸人頭像插畫" />
+        <img class="avatar" :src="avatar" width="192" height="192" alt="手拿遊戲機、面帶微笑的狗獸人頭像插畫" />
         <h1>
           <span class="name-zh">{{ profile.name }}</span>
           <!-- 讓螢幕閱讀器與搜尋引擎讀到兩個名字之間的空格 -->
