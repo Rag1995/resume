@@ -145,7 +145,7 @@ onBeforeUnmount(() => {
   <footer class="footer">
     <p>© {{ new Date().getFullYear() }} {{ profile.name }}，以 Vue 3 與 TypeScript 製作。</p>
     <!-- prettier-ignore -->
-    <p>頭像插畫：<a :href="profile.avatarCredit.url" target="_blank" rel="noreferrer">{{ profile.avatarCredit.name }}<span class="visually-hidden">（X，另開新視窗）</span></a></p>
+    <p>插畫：<a :href="profile.illustrationCredit.url" target="_blank" rel="noreferrer">{{ profile.illustrationCredit.name }}<span class="visually-hidden">（X，另開新視窗）</span></a></p>
   </footer>
 </template>
 

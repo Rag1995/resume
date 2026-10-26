@@ -29,8 +29,8 @@ export interface Profile {
   email: string
   github: string
   githubLabel: string
-  /** 頭像插畫的繪師 */
-  avatarCredit: { name: string; url: string }
+  /** 主視覺與頭像插畫的繪師 */
+  illustrationCredit: { name: string; url: string }
 }
 
 export interface SkillGroup {
@@ -95,7 +95,7 @@ export const profile: Profile = {
   email: 'taipeiyyy@gmail.com',
   github: 'https://github.com/Rag1995',
   githubLabel: 'github.com/Rag1995',
-  avatarCredit: { name: 'アル毛（@capybaraarumao）', url: 'https://x.com/capybaraarumao' },
+  illustrationCredit: { name: 'アル毛（@capybaraarumao）', url: 'https://x.com/capybaraarumao' },
 }
 
 export const about: string[] = [
