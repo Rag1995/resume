@@ -17,7 +17,11 @@
   --font-display: 'LXGW WenKai TC', 'Noto Serif TC', serif;
   --font-body: 'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', system-ui, sans-serif;
 
-  --measure: 38rem;
+  /* 版面寬度：內容欄約 40 個中文字寬，名字區、內容與頁尾都依 --page-width 對齊 */
+  --measure: 40rem;
+  --sidebar: 12rem;
+  --gutter: 4rem;
+  --page-width: var(--measure);
   --radius: 0.5rem;
 
   color-scheme: light dark;
@@ -28,6 +32,13 @@
   background: var(--paper);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+}
+
+/* 桌面版多了側邊導覽，頁面寬度 = 導覽 + 間距 + 內容欄 */
+@media (min-width: 960px) {
+  :root {
+    --page-width: calc(var(--sidebar) + var(--gutter) + var(--measure));
+  }
 }
 
 @media (prefers-color-scheme: dark) {
@@ -63,6 +74,11 @@
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* 開啟截圖燈箱（dialog）時，鎖住背景頁面的捲動 */
+:root:has(dialog[open]) {
+  overflow: hidden;
 }
 
 html {

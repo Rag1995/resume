@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, useTemplateRef } from 'vue'
 
 import type { Project } from '@/data/resume'
 import { getDemoLink, getProjectImages, getSourceLinks } from '@/utils/project'
@@ -9,6 +9,9 @@ const props = defineProps<{ project: Project }>()
 const images = computed(() => getProjectImages(props.project))
 const sourceLinks = computed(() => getSourceLinks(props.project))
 const demo = computed(() => getDemoLink(props.project))
+
+// 點擊截圖時開啟燈箱，並從被點的那一張開始
+const lightbox = useTemplateRef<{ open: (index: number) => void }>('lightbox')
 </script>
 
 <template>
@@ -21,11 +24,14 @@ const demo = computed(() => getDemoLink(props.project))
       </span>
     </div>
     <div v-if="images.length" class="shots" :class="{ multi: images.length > 1 }">
-      <figure v-for="img in images" :key="img.src" class="shot">
-        <img :src="img.src" :alt="img.alt" :width="img.width" :height="img.height" loading="lazy" decoding="async" />
+      <figure v-for="(img, i) in images" :key="img.src" class="shot">
+        <button type="button" class="shot-button" :aria-label="`放大檢視：${img.alt}`" @click="lightbox?.open(i)">
+          <img :src="img.src" :alt="img.alt" :width="img.width" :height="img.height" loading="lazy" decoding="async" />
+        </button>
         <figcaption v-if="img.caption">{{ img.caption }}</figcaption>
       </figure>
     </div>
+    <ImageLightbox v-if="images.length" ref="lightbox" :images="images" :title="project.title" />
     <p class="summary">{{ project.summary }}</p>
     <ul class="highlights">
       <li v-for="item in project.highlights" :key="item">{{ item }}</li>
@@ -107,6 +113,15 @@ h3 {
   border: 1px solid var(--line);
   border-radius: var(--radius);
   background: var(--surface);
+}
+
+.shot-button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: zoom-in;
 }
 
 .shot img {

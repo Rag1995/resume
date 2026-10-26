@@ -62,7 +62,8 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 
 .hero-art {
   position: relative;
-  height: min(82svh, 56.25vw + 6rem);
+  /* 60svh：在常見筆電螢幕上，第一個畫面就能看到名字、介紹與求職狀態 */
+  height: min(60svh, 56.25vw + 6rem);
   min-height: 22rem;
   overflow: hidden;
 }
@@ -112,7 +113,7 @@ const srcset = `${banner768} 768w, ${banner1280} 1280w, ${banner1920} 1920w`
 .hero-text {
   position: relative;
   z-index: 1;
-  width: min(100% - 2rem, 68rem);
+  width: min(100% - 2rem, var(--page-width));
   margin: -5rem auto 0;
   animation: rise 0.9s 0.35s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 }
@@ -216,7 +217,7 @@ h1 {
       transform-origin: 50% 100%;
       animation: hero-exit linear both;
       animation-timeline: scroll(root block);
-      animation-range: 0 80svh;
+      animation-range: 0 60svh;
     }
   }
 }

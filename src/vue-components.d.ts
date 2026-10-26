@@ -13,9 +13,13 @@ declare module 'vue' {
   export interface GlobalComponents {
     ExperienceTimeline: typeof import('./components/ExperienceTimeline.vue')['default']
     HeroBanner: typeof import('./components/HeroBanner.vue')['default']
+    ImageLightbox: typeof import('./components/ImageLightbox.vue')['default']
     ITablerBrandGithub: typeof import('~icons/tabler/brand-github')['default']
+    ITablerChevronLeft: typeof import('~icons/tabler/chevron-left')['default']
+    ITablerChevronRight: typeof import('~icons/tabler/chevron-right')['default']
     ITablerMail: typeof import('~icons/tabler/mail')['default']
     ITablerWorld: typeof import('~icons/tabler/world')['default']
+    ITablerX: typeof import('~icons/tabler/x')['default']
     PawTrail: typeof import('./components/PawTrail.vue')['default']
     ProjectCompact: typeof import('./components/ProjectCompact.vue')['default']
     ProjectItem: typeof import('./components/ProjectItem.vue')['default']

@@ -101,7 +101,7 @@ export const profile: Profile = {
 export const about: string[] = [
   '我是一名前端工程師，專注於 Vue 與 TypeScript。職涯從數據專員起步，以 VBA 與 Power BI 將報表和排班自動化，之後轉職前端；自 2022 年起參與災防告警、道安講習、績效管理等政府與企業平台的開發，2023 年後以接案方式持續合作。',
   '接手既有專案並推進升級，經歷過 Vue 2 遷移至 Vue 3；也熟悉 Leaflet 地圖應用，做過警報範圍繪製與機台監控地圖。後端 API 尚未完成時，我會自建模擬 API 讓前端先行開發，讓客戶及早看到進度。',
-  '我習慣用 Claude Code 搭配 Agent Skills 建立開發流程：先讓 AI 質疑需求與計畫，再拆解步驟、以測試驅動實作，最後自己審查每一段程式碼。AI 幫我加快速度，但架構判斷與品質把關由我負責。',
+  '以 AI 協助開發：由我規劃需求與方向，AI 協助實作，我再負責測試、審查與最終決定。',
 ]
 
 export const skillGroups: SkillGroup[] = [
@@ -138,15 +138,19 @@ export const projects: Project[] = [
   {
     title: '個人履歷網站',
     year: '2026',
-    summary: '你正在看的這個網站。以 Vue 3 + TypeScript 打造，內容與畫面分離，改一個資料檔就能更新履歷。',
+    summary:
+      '你正在看的這個網站。過去的專案一直沒有好好彙整，因此做了這份線上履歷；以 Vue 3 + TypeScript 打造，內容與畫面分離，改一個資料檔就能更新。',
     highlights: [
-      '主視覺圖片從 2.1 MB 壓縮至約 160 KB：以 <picture> 優先提供 AVIF，並以 WebP 作為備援，依螢幕寬度載入不同尺寸',
-      '側邊導覽會隨捲動標示目前閱讀的段落',
-      '主視覺退場、狗腳印步道與經歷時間軸以 CSS scroll-driven animations 實作，零 JS 且不支援的瀏覽器自動退回靜態',
-      '支援深色模式、鍵盤操作與 prefers-reduced-motion',
+      '以自建的 Vue 3 專案範本起始，預先整合 Vite、TypeScript、Tailwind CSS、ESLint／Prettier、自動匯入與檔案式路由',
+      '首次以 Claude Code 進行 AI 協作開發：由我規劃需求與設計方向、實測並回報問題，再與 AI 迭代修正',
+      '在 Mac 與 Windows 的 Edge 實測，發現並回報快速捲動卡頓、觸控板回彈露出空白、遮罩蓋住頁尾文字等問題',
+      '網站包含 AVIF 響應式主視覺、捲動特效、截圖燈箱、深色模式與減少動態效果支援',
     ],
     stack: ['Vite', 'Vue 3', 'TypeScript', 'Claude'],
-    source: 'https://github.com/Rag1995/my-resume',
+    source: [
+      { label: '查看原始碼', url: 'https://github.com/Rag1995/my-resume' },
+      { label: '查看專案範本', url: 'https://github.com/Rag1995/vite-template' },
+    ],
   },
   {
     title: '線上績效管理系統平台',
@@ -227,7 +231,7 @@ export const projects: Project[] = [
   {
     title: '災害告警細胞廣播訊息網',
     year: '2023-2024',
-    summary: '彙整台灣透過細胞廣播發送到手機的災害告警訊息，民眾可查詢每則警訊的內容與發送範圍。',
+    summary: '彙整台灣以細胞廣播發送的災害告警訊息，民眾可查詢每則警訊的內容與發送範圍。',
     highlights: [
       '參與 Vue 2 專案維護，並協助將專案改寫為 Vue 3',
       '導入 vue-i18n 建立多語系架構，支援繁中與英文切換，並將既有頁面文字抽離為語系檔',
@@ -335,7 +339,7 @@ export const experiences: Experience[] = [
     company: '光沅數位創意 Kyart Creative',
     title: '前端工程師',
     highlights: [
-      '以 Vue 2/Vue 3、Vite 與 TypeScript 開發與維護國家災防資訊彙整平台及其管理平台',
+      '以 Vue 2／Vue 3、Vite 與 TypeScript 開發並維護國家災防資訊彙整平台與管理平台',
       '參與 Vue 2 專案遷移至 Vue 3',
     ],
   },
@@ -344,7 +348,7 @@ export const experiences: Experience[] = [
     company: '全鋒汽車股份有限公司',
     title: '數據專員',
     highlights: [
-      '以 Power BI 搭配 VBA 自動化客服月報，原需 2–3 人耗時 3–4 個工作天彙整，縮短為約半天',
+      '以 Power BI 與 VBA 自動化客服月報，將 2–3 人、3–4 個工作天的彙整縮短為約半天',
       '導入 Power BI 建立服務量能、專案績效與客戶服務等儀表板，讓主管隨時查詢數據、作為決策依據',
       '以 VBA 自動從 NAS 讀取各部門 Excel 並彙整報表。開發排班工具，依歷年各季話務量預估人力需求並產生班表雛形',
       '開發專案形象官網，以 Vue 2 建置並部署於 Netlify',

@@ -153,7 +153,7 @@ onBeforeUnmount(() => {
 .layout {
   display: grid;
   grid-template-columns: 1fr;
-  width: min(100% - 2rem, 68rem);
+  width: min(100% - 2rem, var(--page-width));
   margin: 2rem auto 0;
 }
 
@@ -297,7 +297,7 @@ dd li {
 }
 
 .footer {
-  width: min(100% - 2rem, 68rem);
+  width: min(100% - 2rem, var(--page-width));
   margin: 2rem auto 0;
   padding-block: 2rem 3rem;
   border-top: 1px solid var(--line);
@@ -311,8 +311,8 @@ dd li {
 
 @media (min-width: 960px) {
   .layout {
-    grid-template-columns: 12rem 1fr;
-    gap: 4rem;
+    grid-template-columns: var(--sidebar) minmax(0, var(--measure));
+    gap: var(--gutter);
     margin-top: 4rem;
   }
 
