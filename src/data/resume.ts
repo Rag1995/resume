@@ -126,7 +126,7 @@ export const skillGroups: SkillGroup[] = [
   },
   {
     title: 'AI 工具',
-    items: ['Claude', 'Codex', 'GitHub Copilot', 'Agent Skills（Superpowers、grilling、Ponytail）'],
+    items: ['Claude', 'Codex', 'GitHub Copilot'],
   },
   {
     title: '工作方式',
