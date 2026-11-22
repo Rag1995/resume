@@ -12,7 +12,7 @@ import VueRouter from 'vue-router/vite'
 // https://vite.dev/config/
 export default defineConfig({
   // 部署在 GitHub Pages 的 https://rag1995.github.io/resume/ 底下
-  base: '/resume/',
+  base: '/',
   plugins: [
     vue(),
     VueRouter(),
