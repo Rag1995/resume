@@ -4,6 +4,7 @@ import csqShot from '@/assets/projects/csq.webp'
 import dginfraShot from '@/assets/projects/dginfra.webp'
 import iotShot from '@/assets/projects/iot.webp'
 import kpiShot from '@/assets/projects/kpi.webp'
+import memeShot from '@/assets/projects/meme.webp'
 import mhs2Shot from '@/assets/projects/mhs2.webp'
 import slpShot from '@/assets/projects/slp.webp'
 import slpAdminShot from '@/assets/projects/slp-admin.webp'
@@ -167,6 +168,26 @@ export const projects: Project[] = [
       height: 786,
     },
     stack: ['Node.js', 'Faker', 'Swagger', 'bcrypt', 'JWT'],
+  },
+  {
+    title: '北達迷因編輯器',
+    year: '2025',
+    summary: 'Side Project。VTuber 粉絲向的迷因編輯器，可以在角色圖片上加入自己的文字，並將多張圖片合成 GIF 下載。',
+    highlights: [
+      '以 Fabric.js 實作 Canvas 文字編輯，可新增、縮放、旋轉與刪除文字',
+      '以 gif.js 將畫廊中的圖片合成 GIF 並提供下載，畫廊可拖曳調整圖片順序',
+      '以 Vue I18n 支援繁中、英文、日文切換，並支援深色模式與手機、電腦的響應式版面',
+      '以 Driver.js 製作新手操作導覽，引導第一次使用的人完成編輯流程',
+    ],
+    image: {
+      src: memeShot,
+      alt: '北達迷因編輯器的編輯畫面：左側畫布在狐狸角色圖片上加入「狐圖吞棗」文字，右側為文字編輯工具列、文字輸入框與加入文字、加入到畫廊、下載圖片按鈕；下方畫廊排列四張加上不同文字的圖片，以及產生 GIF 按鈕',
+      width: 1154,
+      height: 1150,
+    },
+    stack: ['Vite', 'Vue 3', 'Pinia', 'Vue Router', 'i18n', 'Tailwind CSS', 'Fabric.js', 'gif.js', 'Driver.js'],
+    demo: 'https://hakutatsu-meme-editor.vercel.app',
+    source: 'https://github.com/Rag1995/hakutatsu-meme-editor',
   },
   {
     title: '災害訊息廣播平台',
