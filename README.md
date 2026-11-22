@@ -2,7 +2,7 @@
 
 我的個人履歷網站。過去的專案一直沒有好好彙整，因此做了這份線上履歷，集中介紹我的經歷、技能與作品。
 
-🔗 **網站：** https://rag1995.github.io/resume/
+🔗 **網站：** https://resume.ragdust.dev/
 
 ## 技術
 
@@ -25,12 +25,10 @@
 
 ```bash
 npm install
-npm run dev      # 開發伺服器：http://localhost:5173/resume/
+npm run dev      # 開發伺服器：http://localhost:5173/
 npm run build    # 型別檢查並打包到 dist/
 npm run preview  # 預覽打包結果
 ```
-
-> 因為部署在 GitHub Pages 的子路徑底下，`vite.config.ts` 設定了 `base: '/resume/'`，本機網址也需要加上 `/resume/`。
 
 ## 更新履歷內容
 
@@ -90,7 +88,7 @@ public/              # favicon 等不經打包處理的檔案
 
 push 到 `main` 分支時，GitHub Actions 會自動打包並部署到 GitHub Pages，也可以在 repo 的 **Actions** 分頁手動觸發。
 
-首次使用前，需在 repo 的 **Settings → Pages** 將 **Source** 設為 **GitHub Actions**。
+首次使用前，需在 repo 的 **Settings → Pages** 將 **Source** 設為 **GitHub Actions**，並在 **Custom domain** 填入 `resume.ragdust.dev`。
 
 ## 致謝
 

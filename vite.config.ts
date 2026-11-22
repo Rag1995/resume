@@ -11,7 +11,7 @@ import VueRouter from 'vue-router/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  // 部署在 GitHub Pages 的 https://rag1995.github.io/resume/ 底下
+  // 部署在 GitHub Pages 的自訂子網域 https://resume.ragdust.dev/ 根路徑
   base: '/',
   plugins: [
     vue(),
