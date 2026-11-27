@@ -100,7 +100,7 @@ export const profile: Profile = {
 }
 
 export const about: string[] = [
-  '我是一名前端工程師，專注於 Vue 與 TypeScript。職涯從數據專員起步，以 VBA 與 Power BI 將報表和排班自動化，之後轉職前端；自 2022 年起參與災防告警、道安講習、績效管理等政府與企業平台的開發，2023 年後以接案方式持續合作。',
+  '我是一名前端工程師，專注於 Vue 與 TypeScript。職涯從數據專員起步，以 VBA 與 Power BI 將報表和排班自動化，之後轉職前端；自 2022 年起參與災防告警、道安講習、績效管理等政府專案平台的開發，2023 年後以接案方式持續合作。',
   '接手既有專案並推進升級，經歷過 Vue 2 遷移至 Vue 3；也熟悉 Leaflet 地圖應用，做過警報範圍繪製與機台監控地圖。後端 API 尚未完成時，我會自建模擬 API 讓前端先行開發，讓客戶及早看到進度。',
   '以 AI 協助開發：由我規劃需求與方向，AI 協助實作，我再負責測試、審查與最終決定。',
 ]
@@ -136,38 +136,69 @@ export const skillGroups: SkillGroup[] = [
 ]
 
 export const projects: Project[] = [
+  // {
+  //   title: '個人履歷網站',
+  //   year: '2026',
+  //   summary:
+  //     '你正在看的這個網站。過去的專案一直沒有好好彙整，因此做了這份線上履歷；以 Vue 3 + TypeScript 打造，內容與畫面分離，改一個資料檔就能更新。',
+  //   highlights: [
+  //     '以自建的 Vue 3 專案範本起始，預先整合 Vite、TypeScript、Tailwind CSS、ESLint／Prettier、自動匯入與檔案式路由',
+  //     '首次以 Claude Code 進行 AI 協作開發：由我規劃需求與設計方向、實測並回報問題，再與 AI 迭代修正',
+  //     '在 Mac 與 Windows 的 Edge 實測，發現並回報快速捲動卡頓、觸控板回彈露出空白、遮罩蓋住頁尾文字等問題',
+  //     '網站包含 AVIF 響應式主視覺、捲動特效、截圖燈箱、深色模式與減少動態效果支援',
+  //   ],
+  //   stack: ['Vite', 'Vue 3', 'TypeScript', 'Claude'],
+  //   source: [
+  //     { label: '查看原始碼', url: 'https://github.com/Rag1995/resume' },
+  //     { label: '查看專案範本', url: 'https://github.com/Rag1995/vite-template' },
+  //   ],
+  // },
   {
-    title: '個人履歷網站',
-    year: '2026',
+    title: '道路交通安全講習系統',
+    year: '2023-2025',
     summary:
-      '你正在看的這個網站。過去的專案一直沒有好好彙整，因此做了這份線上履歷；以 Vue 3 + TypeScript 打造，內容與畫面分離，改一個資料檔就能更新。',
+      '公路局的道安講習線上系統。民眾可查詢全台受託單位的班次並自行預約講習；後台供管理受託單位、班期、師資與銷案作業。',
     highlights: [
-      '以自建的 Vue 3 專案範本起始，預先整合 Vite、TypeScript、Tailwind CSS、ESLint／Prettier、自動匯入與檔案式路由',
-      '首次以 Claude Code 進行 AI 協作開發：由我規劃需求與設計方向、實測並回報問題，再與 AI 迭代修正',
-      '在 Mac 與 Windows 的 Edge 實測，發現並回報快速捲動卡頓、觸控板回彈露出空白、遮罩蓋住頁尾文字等問題',
-      '網站包含 AVIF 響應式主視覺、捲動特效、截圖燈箱、深色模式與減少動態效果支援',
+      '負責民眾端預約流程、課後評量、以及前端頁面開發，依地區、日期篩選全台受託單位的班次，讓民眾快速找到可報名的場次',
+      '負責後台帳密權限管理、受託單位管理、班期管理、師資管理、銷案管理與評量，以及 QR Code 掃碼報到等功能',
     ],
-    stack: ['Vite', 'Vue 3', 'TypeScript', 'Claude'],
-    source: [
-      { label: '查看原始碼', url: 'https://github.com/Rag1995/resume' },
-      { label: '查看專案範本', url: 'https://github.com/Rag1995/vite-template' },
+    image: [
+      {
+        src: slpShot,
+        alt: '道路交通安全講習系統首頁，提供預約違規講習、申請扣點講習、查詢或取消報名紀錄、各縣市講習班查詢四個入口',
+        width: 1600,
+        height: 900,
+        caption: '前台：民眾預約首頁',
+      },
+      {
+        src: slpAdminShot,
+        alt: '後台的編輯班期畫面，含班別、開班時間與授課講師設定，下方為學員報名清單與繳費、上課、銷案狀態（個資已模糊處理）',
+        width: 945,
+        height: 532,
+        caption: '後台：班期與學員管理',
+      },
     ],
+    stack: ['Vite', 'Vue 3', 'TypeScript', 'Naive UI'],
+    demo: 'https://slp.mvdis.gov.tw/user/',
   },
   {
-    title: '線上績效管理系統平台',
-    year: '2025',
-    summary: '管理資訊服務廠商與其客戶的績效管理平台，可追蹤各廠商的 KPI 達成率，並審核廠商提報的客戶資料。',
+    title: '災害告警細胞廣播訊息網',
+    year: '2022-2024',
+    summary: '彙整台灣以細胞廣播發送的災害告警訊息，民眾可查詢每則警訊的內容與發送範圍。',
     highlights: [
-      '負責前端頁面切版與 API 串接，包含廠商與客戶管理、KPI 統計、客戶審核與帳號管理',
-      '開發階段以 Node.js 建立模擬 API：用 Faker 快速產生假資料、Swagger 產生 API 文件，並以 bcrypt 雜湊密碼建立帳號、JWT 實作登入驗證，讓客戶在正式 API 完成前即可操作 demo',
+      '參與 Vue 2 專案維護，並協助將專案改寫為 Vue 3',
+      '導入 vue-i18n 建立多語系架構，支援繁中與英文切換，並將既有頁面文字抽離為語系檔',
+      '擴增警訊頁面的地圖資訊：將圖資轉換為 GeoJSON，以 Leaflet 繪製警報發送範圍讓民眾一眼看出哪些地區收到警訊',
+      '依客戶需求將底圖由 OpenStreetMap 替換為 Mapbox，並以 Mapbox Studio 自訂樣式，修正行政區名稱錯誤與英文標籤，讓民眾能正確辨識地名',
     ],
     image: {
-      src: kpiShot,
-      alt: '線上績效管理系統的資服廠商列表：上方為廠商總數、KPI 數值、已過審客戶、待審核客戶與 KPI 達成率等統計卡片，下方為可切換狀態、查看客戶與審核的廠商表格（資料已模糊處理）',
+      src: cbsShot,
+      alt: '災防告警細胞廣播訊息網站首頁，主視覺為從手機發出警訊的擴音器插圖，右上角有英文版切換',
       width: 1600,
-      height: 786,
+      height: 747,
     },
-    stack: ['Node.js', 'Faker', 'Swagger', 'bcrypt', 'JWT'],
+    stack: ['Vue 2', 'Vite', 'Vue 3', 'i18n', 'Leaflet', 'Mapbox', 'GeoJSON'],
+    demo: 'https://cbs.tw/',
   },
   {
     title: '北達迷因編輯器',
@@ -188,6 +219,22 @@ export const projects: Project[] = [
     stack: ['Vite', 'Vue 3', 'Pinia', 'Vue Router', 'i18n', 'Tailwind CSS', 'Fabric.js', 'gif.js', 'Driver.js'],
     demo: 'https://hakutatsu-meme-editor.vercel.app',
     source: 'https://github.com/Rag1995/hakutatsu-meme-editor',
+  },
+  {
+    title: '線上績效管理系統平台',
+    year: '2025',
+    summary: '管理資訊服務廠商與其客戶的績效管理平台，可追蹤各廠商的 KPI 達成率，並審核廠商提報的客戶資料。',
+    highlights: [
+      '負責前端頁面切版與 API 串接，包含廠商與客戶管理、KPI 統計、客戶審核與帳號管理',
+      '開發階段以 Node.js 建立模擬 API：用 Faker 快速產生假資料、Swagger 產生 API 文件，並以 bcrypt 雜湊密碼建立帳號、JWT 實作登入驗證，讓客戶在正式 API 完成前即可操作 demo',
+    ],
+    image: {
+      src: kpiShot,
+      alt: '線上績效管理系統的資服廠商列表：上方為廠商總數、KPI 數值、已過審客戶、待審核客戶與 KPI 達成率等統計卡片，下方為可切換狀態、查看客戶與審核的廠商表格（資料已模糊處理）',
+      width: 1600,
+      height: 786,
+    },
+    stack: ['Node.js', 'Faker', 'Swagger', 'bcrypt', 'JWT'],
   },
   {
     title: '災害訊息廣播平台',
@@ -220,53 +267,6 @@ export const projects: Project[] = [
     },
     stack: ['Vite', 'Vue 3', 'Tailwind CSS', 'daisyUI'],
     offline: true,
-  },
-  {
-    title: '道路交通安全講習系統',
-    year: '2023-2024',
-    summary:
-      '公路局的道安講習線上系統。民眾可查詢全台受託單位的班次並自行預約講習；後台供管理受託單位、班期、師資與銷案作業。',
-    highlights: [
-      '負責民眾端預約流程、課後評量、以及前端頁面開發，依地區、日期篩選全台受託單位的班次，讓民眾快速找到可報名的場次',
-      '負責後台帳密權限管理、受託單位管理、班期管理、師資管理、銷案管理與評量，以及 QR Code 掃碼報到等功能',
-    ],
-    image: [
-      {
-        src: slpShot,
-        alt: '道路交通安全講習系統首頁，提供預約違規講習、申請扣點講習、查詢或取消報名紀錄、各縣市講習班查詢四個入口',
-        width: 1600,
-        height: 900,
-        caption: '前台：民眾預約首頁',
-      },
-      {
-        src: slpAdminShot,
-        alt: '後台的編輯班期畫面，含班別、開班時間與授課講師設定，下方為學員報名清單與繳費、上課、銷案狀態（個資已模糊處理）',
-        width: 945,
-        height: 532,
-        caption: '後台：班期與學員管理',
-      },
-    ],
-    stack: ['Vite', 'Vue 3', 'TypeScript', 'Naive UI'],
-    demo: 'https://slp.mvdis.gov.tw/user/',
-  },
-  {
-    title: '災害告警細胞廣播訊息網',
-    year: '2023-2024',
-    summary: '彙整台灣以細胞廣播發送的災害告警訊息，民眾可查詢每則警訊的內容與發送範圍。',
-    highlights: [
-      '參與 Vue 2 專案維護，並協助將專案改寫為 Vue 3',
-      '導入 vue-i18n 建立多語系架構，支援繁中與英文切換，並將既有頁面文字抽離為語系檔',
-      '擴增警訊頁面的地圖資訊：將圖資轉換為 GeoJSON，以 Leaflet 繪製警報發送範圍讓民眾一眼看出哪些地區收到警訊',
-      '依客戶需求將底圖由 OpenStreetMap 替換為 Mapbox，並以 Mapbox Studio 自訂樣式，修正行政區名稱錯誤與英文標籤，讓民眾能正確辨識地名',
-    ],
-    image: {
-      src: cbsShot,
-      alt: '災防告警細胞廣播訊息網站首頁，主視覺為從手機發出警訊的擴音器插圖，右上角有英文版切換',
-      width: 1600,
-      height: 747,
-    },
-    stack: ['Vue 2', 'Vite', 'Vue 3', 'i18n', 'Leaflet', 'Mapbox', 'GeoJSON'],
-    demo: 'https://cbs.tw/',
   },
   {
     title: 'IoT 資訊彙整平台',
